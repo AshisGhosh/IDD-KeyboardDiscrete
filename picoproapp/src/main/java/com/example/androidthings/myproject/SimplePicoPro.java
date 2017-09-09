@@ -126,6 +126,8 @@ public abstract class SimplePicoPro extends SimpleBoard {
     public void setActivity(Activity a) {
         activity = a;
     }
+
+
     void printCharacterToScreen(char c) {
         if (activity == null) {
             Log.e(TAG,"printChar: activity is null");
@@ -173,6 +175,7 @@ public abstract class SimplePicoPro extends SimpleBoard {
             Log.e(TAG,"clearString: Could not find R.id.editText");
         }
     }
+
 
     public void teardown() {
         try {

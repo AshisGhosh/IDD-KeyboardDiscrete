@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     /** CHANGE THE RIGHT-HAND SIDE OF THIS LINE TO THE NAME OF YOUR APPLICATION CLASS **/
-    private SimplePicoPro myBoardApp = new Hw2TemplateApp();
+    private SimplePicoProandMore myBoardApp = new Hw2TemplateApp();
 
     /** DON'T CHANGE THE CODE BELOW - PUT YOUR CODE INTO YOUR APPLICATION CLASS **/
     private Handler handler = new Handler();
@@ -47,6 +47,7 @@ public class MainActivity extends Activity {
         /** SCREEN INITIALIZATION */
         setContentView(R.layout.textlayout);
         myBoardApp.setActivity(this);
+        myBoardApp.setActivity2(this);
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
