@@ -54,6 +54,10 @@
         android:layout_height="match_parent"
         android:cursorVisible="true"
         android:ems="10"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:textSize="35sp"
+        android:padding="40sp"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:visibility="visible" />
 
 </LinearLayout>

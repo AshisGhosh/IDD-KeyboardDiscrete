@@ -39,6 +39,7 @@ public abstract class SimplePicoProandMore extends SimplePicoPro{
         editText = (EditText) activity.findViewById(R.id.editText2);
 
         if(editText != null) {
+            editText.setCursorVisible(true);
             editText.getText().append(s);
 
 //            TextView view = (TextView)activity.findViewById(R.id.editText2);
@@ -130,6 +131,7 @@ public abstract class SimplePicoProandMore extends SimplePicoPro{
             String string = editText.getText().toString();
             string = string.substring(0,string.length()-1);
             TextView view = (TextView)activity.findViewById(R.id.editText2);
+            view.setCursorVisible(true);
             view.setText(string);
         } else {
             Log.e(TAG,"printChr: Could not find R.id.editText2");
