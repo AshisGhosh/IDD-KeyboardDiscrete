@@ -2,10 +2,12 @@ package com.example.androidthings.myproject;
 
 import android.app.Activity;
 import android.os.SystemClock;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.text.Html;
+
 
 import com.google.android.things.contrib.driver.adcv2x.Adcv2x;
 import com.google.android.things.pio.Gpio;
@@ -27,7 +29,7 @@ public abstract class SimplePicoProandMore extends SimplePicoPro{
         activity = a;
     }
 
-    void printCharacterToScreen2(char c) {
+    void printStringToScreen2(String s) {
         if (activity == null) {
             Log.e(TAG,"printChar: activity is null");
             return;
@@ -37,7 +39,7 @@ public abstract class SimplePicoProandMore extends SimplePicoPro{
         editText = (EditText) activity.findViewById(R.id.editText2);
 
         if(editText != null) {
-            editText.getText().append(c);
+            editText.getText().append(s);
 
 //            TextView view = (TextView)activity.findViewById(R.id.editText2);
 //
@@ -45,20 +47,21 @@ public abstract class SimplePicoProandMore extends SimplePicoPro{
 //
 //            view.setText(Html.fromHtml(formattedText, Html.FROM_HTML_MODE_LEGACY));
         } else {
-            Log.e(TAG,"printChar: Could not find R.id.editText2");
+            Log.e(TAG,"printStr: Could not find R.id.editText2");
         }
     }
 
-    void intializeCharSelect(char[][] alphabet){
-        int[] temp_index = {0,0,0};
+    void intializeCharSelect(String[][] alphabet){
+        int[] temp_index = {0,0,0,0};
         int temp_row_index = 0;
         renderCharSelect(alphabet, temp_index, temp_row_index);
     }
 
-    void renderCharSelect(char[][] alphabet, int[] index, int row_index){
+    void renderCharSelect(String[][] alphabet, int[] index, int row_index){
 //        TextView view = (TextView)activity.findViewById(R.id.editText);
         TextView view = null;
         String string, color, size_start, size_end, formatopen, formatclose;
+        string = null;
 
         for (int i=0; i<alphabet.length; i++) {
             switch(i){
@@ -70,6 +73,9 @@ public abstract class SimplePicoProandMore extends SimplePicoPro{
                     break;
                 case 2:
                     view = (TextView)activity.findViewById(R.id.editText4);
+                    break;
+                case 3:
+                    view = (TextView)activity.findViewById(R.id.editText5);
                     break;
                 default:
                     break;
@@ -88,13 +94,23 @@ public abstract class SimplePicoProandMore extends SimplePicoPro{
 
             formatopen = "<b><font color='" + color + "'>" + size_start;
             formatclose = size_end + "</font></b>";
-            string = new String(alphabet[i]);
-            if (index[i] == 0)
-                string = formatopen + string.substring(index[i], index[i] + 1) + formatclose + string.substring(index[i] + 1, string.length());
-            else if (index[i] == string.length())
-                string = string.substring(0, index[i]) + formatopen + string.substring(index[i], index[i] + 1) + formatclose;
-            else
-                string = string.substring(0, index[i]) + formatopen + string.substring(index[i], index[i] + 1) + formatclose + string.substring(index[i] + 1, string.length());
+//            string = new String(alphabet[i]);
+
+            if (i!=3) {
+                string = TextUtils.join("", alphabet[i]);
+                if (index[i] == 0)
+                    string = formatopen + string.substring(index[i], index[i] + 1) + formatclose + string.substring(index[i] + 1, string.length());
+                else if (index[i] == string.length())
+                    string = string.substring(0, index[i]) + formatopen + string.substring(index[i], index[i] + 1) + formatclose;
+                else
+                    string = string.substring(0, index[i]) + formatopen + string.substring(index[i], index[i] + 1) + formatclose + string.substring(index[i] + 1, string.length());
+            }
+            else if(i == 3){
+                if (index[i] == 0)
+                    string = formatopen + alphabet[i][0] + formatclose + "\t" + alphabet[i][1];
+                else if (index[i] ==1)
+                    string = alphabet[i][0] + "\t" + formatopen + alphabet[i][1] + formatclose;
+            }
 
             if (row_index ==i ){
                 string = "<big>" + string + "</big>";
@@ -103,6 +119,20 @@ public abstract class SimplePicoProandMore extends SimplePicoPro{
                 view.setText(Html.fromHtml(string, Html.FROM_HTML_MODE_LEGACY));
             else
                 println("view is null for keyselect update");
+        }
+    }
+
+    void deleteLastCharacter(){
+        EditText editText;
+        editText = (EditText) activity.findViewById(R.id.editText2);
+
+        if(editText != null) {
+            String string = editText.getText().toString();
+            string = string.substring(0,string.length()-1);
+            TextView view = (TextView)activity.findViewById(R.id.editText2);
+            view.setText(string);
+        } else {
+            Log.e(TAG,"printChr: Could not find R.id.editText2");
         }
     }
 }

@@ -10,6 +10,7 @@
         android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:cursorVisible="false"
         android:ems="10"
         android:gravity="center"
         android:inputType="textMultiLine"
@@ -20,35 +21,38 @@
         android:id="@+id/editText3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:cursorVisible="false"
         android:ems="10"
+        android:gravity="center"
         android:inputType="textMultiLine"
         android:letterSpacing="1.1"
-        android:gravity="center"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
     <EditText
         android:id="@+id/editText4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:cursorVisible="false"
         android:ems="10"
+        android:gravity="center"
         android:inputType="textMultiLine"
         android:letterSpacing="1.1"
-        android:gravity="center"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
     <EditText
         android:id="@+id/editText5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:cursorVisible="false"
         android:ems="10"
-        android:letterSpacing="1.1"
         android:gravity="center"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
 
     <EditText
         android:id="@+id/editText2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:cursorVisible="true"
         android:ems="10"
         android:inputType="textMultiLine" />
 

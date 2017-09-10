@@ -14,8 +14,9 @@ public class Hw2TemplateApp extends SimplePicoProandMore {
 //    public int index = 0;
 
 
-    public char[][] alphabet = {{'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'}, {'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'}, {'Z', 'X', 'C', 'V', 'B', 'N', 'M', '\u2190'}};
-    public int[] index = {0,0,0};
+//    public char[][] alphabet = {{'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'}, {'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'}, {'Z', 'X', 'C', 'V', 'B', 'N', 'M', '\u2190'}};
+    public String[][] alphabet = {{"Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"}, {"A", "S", "D", "F", "G", "H", "J", "K", "L"}, {"Z", "X", "C", "V", "B", "N", "M"}, {"SPACE", "DEL"}};
+    public int[] index = {0,0,0,0};
     public int row_index = 0;
 
     @Override
@@ -56,6 +57,8 @@ public class Hw2TemplateApp extends SimplePicoProandMore {
 //            printStringToScreen("QWERTY");
             if (index[row_index] > 0)
                 index[row_index]--;
+            else if (index[row_index] == 0)
+                index[row_index] = alphabet[row_index].length -1;
         }
         //when 39 goes from HIGH to HIGH
         else if (pin==GPIO_39 && value==HIGH) {
@@ -64,19 +67,33 @@ public class Hw2TemplateApp extends SimplePicoProandMore {
 //              printCharacterToScreen2('Q');
             if (index[row_index] < alphabet[row_index].length-1)
                 index[row_index]++;
+            else if (index[row_index] == alphabet[row_index].length-1)
+                index[row_index] = 0;
         }
 
         else if (pin==GPIO_35 && value==HIGH){
             if (row_index>0)
                 row_index--;
+            else if (row_index ==0)
+                row_index = 3;
         }
         else if (pin==GPIO_34 && value==HIGH){
-            if (row_index<2)
+            if (row_index<3)
                 row_index++;
+            else if (row_index == 3)
+                row_index = 0;
         }
 
         else if (pin==GPIO_37 && value==HIGH){
-            printCharacterToScreen2(alphabet[row_index][index[row_index]]);
+            if (row_index!=3)
+                printStringToScreen2(alphabet[row_index][index[row_index]]);
+            else if (row_index ==3){
+                if (index[row_index] == 0){
+                    printStringToScreen2(" ");
+                }
+                else if (index[row_index] == 1)
+                    deleteLastCharacter();
+            }
         }
 
         renderCharSelect(alphabet, index, row_index);
